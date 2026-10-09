@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta name="robots" content="noindex"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fees Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b2033;--mu:#6b7280;--bd:#e5e7ef;--ok:#16a34a;--bad:#ef4444;--ac:#4f46e5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1200px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:0}.sub{color:var(--mu);font-size:13px}
+.top{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:14px}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:9px 14px;font-size:13px;cursor:pointer}
+.btn.g{background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+.fl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+select,input{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:8px;font-size:13px;max-width:100%}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.c .l{color:var(--mu);font-size:12px}.c .v{font-size:22px;font-weight:700;margin-top:4px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;margin-bottom:12px}
+h3{margin:0 0 10px;font-size:14px}
+.r{display:grid;grid-template-columns:110px 1fr 44px;gap:8px;align-items:center;margin:7px 0;font-size:12px}
+.r .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{display:flex;height:16px;border-radius:5px;overflow:hidden;background:var(--bd)}
+.bar i{display:block}.p{background:var(--ok)}.q{background:var(--bad)}.o{background:var(--ac)}
+.lg{font-size:12px;color:var(--mu);margin-bottom:6px}.lg b{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--bd);white-space:nowrap}th{color:var(--mu);font-weight:600;font-size:12px}
+.gh{font-size:12px;font-weight:600;color:var(--mu);margin:12px 0 6px}.kk{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.mu{color:var(--mu)}.bad{color:var(--bad);font-weight:600}.drop{border:2px dashed var(--bd);border-radius:12px;padding:28px;text-align:center;color:var(--mu)}
+
+/* colourful theme */
+:root{--bg:#f4f1ff;--ac:#7c3aed;--ok:#10b981;--bad:#f43f5e;--bd:#e4defa}
+body{background:linear-gradient(160deg,#f4f1ff 0%,#fff1f8 50%,#eefbff 100%) fixed}
+h1{background:linear-gradient(90deg,#7c3aed,#ec4899,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:26px}
+h1 .sub{color:var(--mu);-webkit-text-fill-color:var(--mu)}
+.btn{background:linear-gradient(90deg,#7c3aed,#ec4899)}.btn.g{background:var(--card);color:var(--tx)}
+h3{border-left:4px solid #ec4899;padding-left:8px}
+.c{box-shadow:0 4px 14px rgba(124,58,237,.10)}
+th{background:rgba(124,58,237,.10);color:var(--tx)}
+tbody tr:hover td{background:rgba(236,72,153,.07)}
+table[id] tbody tr:last-child td{font-weight:700;background:rgba(124,58,237,.08)}
+.p{background:linear-gradient(90deg,#10b981,#34d399)}.q{background:linear-gradient(90deg,#fb7185,#f43f5e)}
+.bar{height:18px;border-radius:9px}
+select:focus,input:focus{outline:2px solid #a78bfa}
+#k .c{color:#fff;border:0}#k .c .l{color:rgba(255,255,255,.9)}
+#k .kk:nth-child(2) .c{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+#k .kk:nth-child(4) .c{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
+#k .kk:nth-child(6) .c{background:linear-gradient(135deg,#f59e0b,#f97316)}
+#k .kk:nth-child(8) .c{background:linear-gradient(135deg,#ec4899,#f43f5e)}
+.gh{color:var(--tx);font-size:13px}
+body.locked .w{display:none}
+#lg{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#7c3aed,#ec4899 60%,#f59e0b);padding:16px;z-index:99}
+#lg .box{background:var(--card);color:var(--tx);border-radius:18px;padding:28px;width:100%;max-width:370px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+#lg h2{margin:0 0 4px;font-size:22px}#lg input{width:100%;margin:8px 0}#lg .btn{width:100%;padding:11px;margin-top:6px}#er{color:var(--bad);font-size:13px;min-height:18px;margin-top:8px}
+
+[hidden]{display:none!important}
+.tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}.tab{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer}
+.tab.on{background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;border-color:transparent}
+#md{position:fixed;inset:0;background:rgba(15,10,40,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+#md .box{background:var(--card);color:var(--tx);border-radius:16px;padding:20px;width:100%;max-width:480px;max-height:90vh;overflow:auto}
+#md input,#md select{width:100%;margin:6px 0}.hh{border-top:1px solid var(--bd);padding:6px 0;font-size:13px}
+.b{padding:2px 9px;border-radius:10px;font-size:12px;color:#fff;white-space:nowrap}.b.g{background:#10b981}.b.y{background:#f59e0b}.b.r{background:#f43f5e}.b.n{background:#6366f1}
+#f_k{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+#f_k .c{color:#fff;border:0;background:linear-gradient(135deg,#6366f1,#8b5cf6)}#f_k .c:nth-child(2){background:linear-gradient(135deg,#06b6d4,#3b82f6)}#f_k .c:nth-child(3){background:linear-gradient(135deg,#10b981,#34d399)}#f_k .c:nth-child(4){background:linear-gradient(135deg,#ec4899,#f43f5e)}#f_k .c:nth-child(5){background:linear-gradient(135deg,#f59e0b,#f97316)}#f_k .c .l{color:rgba(255,255,255,.9)}
+
+/* navy + cyan theme */
+:root{--bg:#f4f7fb;--card:#fff;--tx:#0b1b3f;--mu:#6b7a99;--bd:#e3e9f2;--ok:#16a34a;--bad:#ef4444;--ac:#0b1f4b;--cy:#06b6d4}
+body{background:var(--bg);font-family:'Plus Jakarta Sans',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--tx);font-size:26px;font-weight:800}
+h1 .sub{color:var(--mu);-webkit-text-fill-color:var(--mu);font-weight:500}
+.btn{background:var(--ac);color:#fff;border-radius:10px;font-weight:600}.btn.g{background:#fff;color:var(--tx);border:1px solid var(--bd)}
+h3{border-left:0;padding-left:0;font-size:15px;font-weight:700}
+.c{border-radius:14px;box-shadow:none;border:1px solid var(--bd)}
+th{background:#f4f7fb;color:var(--mu);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+tbody tr:hover td{background:#f2fafd}
+table[id] tbody tr:last-child td{font-weight:700;background:#eef6fb}
+.p{background:#22c55e}.q{background:#f87171}.o{background:var(--cy)}
+.bar{height:16px;border-radius:8px}
+select,input{border-radius:10px}select:focus,input:focus{outline:2px solid var(--cy)}
+.tab{border-radius:999px;font-weight:600}.tab.on{background:var(--ac);color:#fff}
+.gh{color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.bad{color:#dc2626}
+#k .c,#f_k .c,#k .kk:nth-child(2) .c,#k .kk:nth-child(4) .c,#k .kk:nth-child(6) .c,#k .kk:nth-child(8) .c,#f_k .c:nth-child(2),#f_k .c:nth-child(3),#f_k .c:nth-child(4),#f_k .c:nth-child(5){background:#fff;color:var(--tx);border:1px solid var(--bd);border-left:4px solid var(--cy)}
+#k .kk:nth-child(2) .c{border-left-color:#0b1f4b}#k .kk:nth-child(4) .c{border-left-color:#06b6d4}#k .kk:nth-child(6) .c{border-left-color:#f97316}#k .kk:nth-child(8) .c{border-left-color:#ef4444}
+#f_k .c:nth-child(2){border-left-color:#0b1f4b}#f_k .c:nth-child(3){border-left-color:#22c55e}#f_k .c:nth-child(4){border-left-color:#ef4444}#f_k .c:nth-child(5){border-left-color:#f97316}
+#k .c .l,#f_k .c .l{color:var(--mu)}#k .c .v,#f_k .c .v{color:var(--tx)}
+.b{font-weight:600}.b.g{background:#dcfce7;color:#15803d}.b.y{background:#fef3c7;color:#b45309}.b.r{background:#fee2e2;color:#b91c1c}.b.n{background:#dbeafe;color:#1d4ed8}
+#lg{background:linear-gradient(135deg,#0b1f4b,#0e7490 70%,#06b6d4)}
+</style></head><body class="locked"><div id="lg"><div class="box"><h2>Fees Dashboard</h2><div class="sub">Sign in with your email and password</div>
+<input id="em" type="email" placeholder="Email id" autocomplete="username"><input id="pw" type="password" placeholder="Password" autocomplete="current-password">
+<button class="btn" onclick="signin()">Sign in</button><div id="er"></div></div></div>
+<div class="w">
+<div class="top"><div><h1>Fees Dashboard <span class="sub">(Active students only)</span></h1><div class="sub" id="src">Loading...</div></div>
+<div><button class="btn adm" onclick="document.getElementById('f').click()">Upload CSV</button>
+<button class="btn g adm" onclick="demo()">Demo data</button><button class="btn g adm" onclick="sheet()">Google Sheet link</button> <button class="btn g" onclick="refresh()">Refresh</button> <span class="sub" id="who"></span> <button class="btn g" onclick="signout()">Sign out</button><input type="file" id="f" accept=".csv" hidden></div></div>
+<div class="tabs"><button class="tab on" id="t1" onclick="go(1)">Overview</button><button class="tab" id="t2" onclick="go(2)">Students &amp; Disposition</button><button class="tab" id="t3" onclick="go(3)">Follow-ups (promise dates)</button></div>
+<div class="sub" id="dnote" style="margin:-4px 0 10px"></div>
+<div id="pg1"><div class="fl" id="fl"></div>
+<div id="k" style="margin-bottom:14px"></div>
+<div class="g2"><div class="c"><h3>Campus-wise (fees due till date)</h3><div class="lg"><b class="p"></b>Paid<b class="q"></b>Pending</div><div id="cm"></div></div>
+<div class="c"><h3>Batch-wise (fees due till date)</h3><div class="lg"><b class="p"></b>Paid<b class="q"></b>Pending</div><div id="bt"></div></div></div>
+<div class="c" style="margin-bottom:12px"><h3>Campus-wise (all metrics)</h3><div class="tw"><table id="cp" style="min-width:1150px"></table></div></div>
+<div class="c" style="margin-bottom:12px"><h3>Batch-wise (all metrics)</h3><div class="tw"><table id="bt2" style="min-width:1150px"></table></div></div>
+<div class="c" style="margin-bottom:12px"><h3>Loan type-wise (all metrics)</h3><div class="tw"><table id="ln" style="min-width:1150px"></table></div></div>
+<div class="g2"><div class="c"><h3>Semester-wise (total)</h3><div class="lg"><b class="p"></b>Paid<b class="q"></b>Pending</div><div id="sm"></div></div>
+<div class="c"><h3>Batch x Semester pending</h3><div class="tw"><table id="bs" style="min-width:560px"></table></div></div></div>
+<div class="c"><div class="top" style="margin:0 0 8px"><h3 style="margin:0">Top pending students</h3><input id="q" placeholder="Search by name or ID"></div>
+<div class="tw"><table><thead><tr><th>Name</th><th>ID</th><th>Campus</th><th>Batch</th><th>Pending (till date)</th><th>Cur sem pending</th><th>Previous sem pending</th></tr></thead><tbody id="tb"></tbody></table></div></div></div>
+<div id="pg2" hidden>
+<div class="fl"><input id="s_q" placeholder="Search by name or ID" oninput="drawS()"><select id="s_c" onchange="drawS()"></select><select id="s_b" onchange="drawS()"></select>
+<select id="s_d" onchange="drawS()"><option value="">All students</option><option value="has">Disposition added</option><option value="none">No disposition yet</option></select>
+<select id="s_p" onchange="drawS()"><option value="due">Only students with pending fees</option><option value="all">All students</option></select></div>
+<div class="c"><div class="top" style="margin:0 0 6px"><div class="sub" id="s_n"></div><button class="btn adm" onclick="expS()">Export CSV</button></div><div class="tw"><table style="min-width:900px"><thead><tr><th>Name</th><th>ID</th><th>Campus</th><th>Batch</th><th>Pending till date</th><th>Cur sem pending</th><th>Previous pending</th><th>Latest disposition</th><th></th></tr></thead><tbody id="s_t"></tbody></table></div></div></div>
+<div id="pg3" hidden>
+<div class="fl"><span class="sub" style="align-self:center">Promise date:</span><input type="date" id="f_a" onchange="drawF()"><span class="sub" style="align-self:center">to</span><input type="date" id="f_b" onchange="drawF()">
+<select id="f_s" onchange="drawF()"><option value="">All statuses</option><option value="paid">Paid</option><option value="part">Partly paid</option><option value="np">Not paid yet (promise date upcoming)</option><option value="over">Not paid (promise date passed)</option></select><select id="f_c" onchange="drawF()"></select></div>
+<div id="f_k"></div>
+<div class="c" style="margin-bottom:12px"><h3>Date-wise promises</h3><div class="tw"><table id="f_d" style="min-width:560px"></table></div></div>
+<div class="c"><div class="top" style="margin:0 0 8px"><h3 style="margin:0">What students promised</h3><button class="btn adm" onclick="expF()">Export CSV</button></div><div class="tw"><table style="min-width:1000px"><thead><tr><th>Name</th><th>ID</th><th>Campus</th><th>Batch</th><th>Promise date</th><th>Reason</th><th>Pending (then)</th><th>Pending (now)</th><th>Paid since</th><th>Status</th><th></th></tr></thead><tbody id="f_t"></tbody></table></div></div></div>
+<div id="md"><div class="box"><h3 id="m_t" style="margin-bottom:4px"></h3><div class="sub" id="m_i" style="margin-bottom:10px"></div>
+<select id="m_r"><option value="">Select reason</option><option>Promised to pay (gave a date)</option><option>Loan in process</option><option>Discussed with parents</option><option>Waiting for scholarship / refund</option><option>Not picking up calls</option><option>Refused to pay fees</option><option>Financial problem</option><option>Other</option></select>
+<div class="sub">Date the student promised to pay by (promise date)</div><input type="date" id="m_d"><input id="m_n" placeholder="Note (optional)">
+<div id="m_e" style="color:var(--bad);font-size:13px;min-height:16px"></div>
+<div style="display:flex;gap:8px;margin:6px 0 10px"><button class="btn" id="m_s" onclick="saveD()">Save</button><button class="btn g" onclick="closeD()">Close</button></div>
+<h3>Previous dispositions</h3><div id="m_h"></div></div></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+var R=[],F={Campus_Name:'',Batch:'',Program_Name:''};
+var num=function(v){var n=parseFloat(String(v==null?'':v).replace(/[₹,\s]/g,''));return isNaN(n)?0:n};
+var fmt=function(n){n=Math.round(n);return '₹'+(n>=1e7?(n/1e7).toFixed(2)+' Cr':n>=1e5?(n/1e5).toFixed(2)+' L':n.toLocaleString('en-IN'))};
+var $=function(i){return document.getElementById(i)};
+function sum(a,k){return a.reduce(function(s,r){return s+num(r[k])},0)}
+function group(a,k){var m={};a.forEach(function(r){var x=r[k]||'Not available';(m[x]=m[x]||[]).push(r)});return m}
+function cat(v){var s=String(v||'').trim().toLowerCase();if(!s||s==='na'||s==='n/a'||s==='not available')return 'Self Pay';if(/drcc|bihar/.test(s))return 'DRCC';if(/gradquest|grayquest|grad quest|jodo|gyandhan|gyan dhan/.test(s))return 'Sunstone Loan';if(s==='student_interested')return 'Student interested';return 'Bank Loan'}
+function tbl(el,hd,rows,tot){var td=function(x,i,b){return '<td'+(i?' style="text-align:right"':'')+'>'+(b?'<b>'+x+'</b>':x)+'</td>'};
+$(el).innerHTML='<thead><tr>'+hd.map(function(x,i){return '<th'+(i?' style="text-align:right"':'')+'>'+x+'</th>'}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(x,i){return td(x,i)}).join('')+'</tr>'}).join('')+(tot?'<tr>'+tot.map(function(x,i){return td(x,i,1)}).join('')+'</tr>':'')+'</tbody>'}
+function bars(el,rows){var mx=Math.max.apply(null,rows.map(function(r){return r.a+r.b}).concat([1]));
+$(el).innerHTML=rows.map(function(r){var t=r.a+r.b;return '<div class="r"><div class="n" title="'+r.n+'">'+r.n+'</div><div><div class="bar" style="width:'+(t/mx*100)+'%"><i class="p" style="width:'+(r.a/(t||1)*100)+'%"></i><i class="q" style="flex:1"></i></div><div class="mu" style="font-size:11px;margin-top:2px">Total '+fmt(t)+' · Paid '+fmt(r.a)+' · Pending '+fmt(r.b)+'</div></div><div>'+Math.round(r.a/(t||1)*100)+'%</div></div>'}).join('')||'<div class="sub">No data</div>'}
+function single(el,rows){var mx=Math.max.apply(null,rows.map(function(r){return r.v}).concat([1]));
+$(el).innerHTML=rows.map(function(r){return '<div class="r"><div class="n" title="'+r.n+'">'+r.n+'</div><div class="bar"><i class="o" style="width:'+(r.v/mx*100)+'%"></i></div><div>'+fmt(r.v)+'</div></div>'}).join('')||'<div class="sub">No data</div>'}
+function build(){var h='';Object.keys(F).forEach(function(k){var vals=Array.from(new Set(R.map(function(r){return r[k]}).filter(Boolean))).sort();
+h+='<select onchange="F[\''+k+'\']=this.value;draw()"><option value="">All '+k.replace('_Name','').replace('_',' ')+'</option>'+vals.map(function(v){return '<option'+(F[k]===v?' selected':'')+'>'+v+'</option>'}).join('')+'</select>'});$('fl').innerHTML=h}
+function draw(){var a=R.filter(function(r){return Object.keys(F).every(function(k){return !F[k]||r[k]===F[k]})});
+var kc=function(l,v){return '<div class="c"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>'};
+var one=function(k){return fmt(sum(a,k))};
+var td=sum(a,'Total Fee Till Date'),pt=sum(a,'Total Fee Paid Till Date'),ov=sum(a,'Total Fee Pending Till Date');
+var cm=Object.keys(group(a,'Batch')).sort().map(function(b){return b+' = Sem '+cs(b)}).join(', ');
+$('k').innerHTML=[['Total (full course)',[['Students',a.length.toLocaleString('en-IN')],['Total fee',one('Total Fee')],['Total collected',one('Total Fee Paid')],['Total pending',one('Total Fee Pending')]]],['Till date',[['Total fee till date',fmt(td)],['Collected till date',fmt(pt)],['Pending till date',fmt(ov)],['Collection % (till date)',(td?pt/td*100:0).toFixed(1)+'%']]],['Current semester ('+cm+')',[['Current sem total',one('_cf')],['Current sem collected',one('_cp')],['Current sem pending',one('_ce')]]],['Previous semesters',[['Previous sem pending',one('Previous pending')]]]].map(function(g){return '<div class="gh">'+g[0]+'</div><div class="kk">'+g[1].map(function(x){return kc(x[0],x[1])}).join('')+'</div>'}).join('');
+var rowsBy=function(k){var g=group(a,k);return Object.keys(g).map(function(n){return{n:n,a:sum(g[n],'Total Fee Paid Till Date'),b:sum(g[n],'Total Fee Pending Till Date')}}).sort(function(x,y){return y.b-x.b})};
+bars('cm',rowsBy('Campus_Name'));bars('bt',rowsBy('Batch').slice(0,12));
+var s=[];for(var i=1;i<=8;i++){var p=sum(a,'Sem'+i+' Fee Paid'),q=sum(a,'Sem'+i+' Fee Pending');if(p+q>0)s.push({n:'Sem '+i,a:p,b:q})}bars('sm',s);
+var MK=['Total Fee','Total Fee Paid','Total Fee Pending','Total Fee Till Date','Total Fee Paid Till Date','Total Fee Pending Till Date','_cf','_cp','_ce','Previous pending'];
+var MH=['Total fee','Collected','Pending','Fee till date','Collected till date','Pending till date','Cur sem total','Cur sem collected','Cur sem pending','Previous sem pending'];
+var MV=function(g){return MK.map(function(k){return fmt(sum(g,k))})};
+var MT=function(el,first,g,order){tbl(el,[first,'Students'].concat(MH),order.map(function(n){return[n,g[n].length].concat(MV(g[n]))}),['Total',a.length].concat(MV(a)))};
+var cp=group(a,'Campus_Name');MT('cp','Campus',cp,Object.keys(cp).sort(function(x,y){return sum(cp[y],'Total Fee Pending')-sum(cp[x],'Total Fee Pending')}));
+var bg=group(a,'Batch');MT('bt2','Batch',bg,Object.keys(bg).sort());
+var lg=group(a.map(function(r){return Object.assign({},r,{LT:cat(r['Loan Partners'])})}),'LT');
+MT('ln','Loan type',lg,['Self Pay','Bank Loan','DRCC','Sunstone Loan','Student interested'].filter(function(n){return lg[n]}));
+var sh=['Batch'];for(var i=1;i<=8;i++)sh.push('Sem '+i+' pending');sh.push('Total pending');
+var brow=function(n,g){var r=[n];for(var i=1;i<=8;i++)r.push(fmt(sum(g,'Sem'+i+' Fee Pending')));r.push(fmt(sum(g,'Total Fee Pending')));return r};
+tbl('bs',sh,Object.keys(bg).sort().map(function(n){return brow(n,bg[n])}),brow('Total',a));
+var t=$('q').value.toLowerCase();
+var top=a.filter(function(r){return num(r['Total Fee Pending Till Date'])>0&&(!t||(String(r.Name)+String(r.ID)).toLowerCase().indexOf(t)>-1)}).sort(function(x,y){return num(y['Total Fee Pending Till Date'])-num(x['Total Fee Pending Till Date'])}).slice(0,50);
+$('tb').innerHTML=top.map(function(r){return '<tr><td>'+(r.Name||'')+'</td><td>'+(r.ID||'')+'</td><td>'+(r.Campus_Name||'')+'</td><td>'+(r.Batch||'')+'</td><td class="bad">'+fmt(num(r['Total Fee Pending Till Date']))+'</td><td>'+fmt(r._ce)+'</td><td>'+fmt(num(r['Previous pending']))+'</td></tr>'}).join('')||'<tr><td colspan="7" class="sub">No students found</td></tr>'}
+function cs(b){var d=new Date(),s=(d.getFullYear()-num(b))*2+(d.getMonth()>=7?1:0);return Math.min(8,Math.max(1,s))}
+function load(rows,label,keep){rows=rows.filter(function(r){return r.ID&&r.Name&&r.ID!=='ID'&&String(r.Active_Status).trim().toLowerCase()==='active'});IDX={};rows.forEach(splitYear);rows.forEach(function(r){var c=cs(r.Batch);IDX[r.ID]=r;if(r._y){var pv=0;for(var k=1;k<c;k++)pv+=num(r['Sem'+k+' Fee Pending']);r['Previous pending']=pv}r._cp=num(r['Sem'+c+' Fee Paid']);r._ce=num(r['Sem'+c+' Fee Pending']);r._cf=r._cp+r._ce});R=rows;if(!keep)F={Campus_Name:'',Batch:'',Program_Name:''};$('src').textContent=label;build();draw();fillF();if(pg===2)drawS();if(pg===3)drawF()}
+$('q').oninput=draw;
+$('f').onchange=function(e){var f=e.target.files[0];if(!f)return;Papa.parse(f,{header:true,skipEmptyLines:true,complete:function(r){load(r.data,f.name+' ('+r.data.length+' students)')}})};
+function demo(){var C=['Delhi','Pune','Bangalore','Jaipur'],B=['2023','2024','2025'],P=['B.Tech CSE','BBA'],L=['None','Partner A','Partner B'],BK=['0','1-30 days','31-60 days','60+ days'],d=[];
+for(var i=0;i<300;i++){var fee=400000+Math.floor(Math.random()*200000),per=fee/8,td=per*(2+Math.floor(Math.random()*4)),pt=td*(0.5+Math.random()*0.5),ov=td-pt,pd=pt+(Math.random()<.4?per:0);
+var r={Name:'Student '+(i+1),ID:'S'+(1000+i),Campus_Name:C[i%4],Batch:B[i%3],Program_Name:P[i%2],Active_Status:Math.random()<.92?'Active':'Inactive','Total Fee':fee,'Total Fee Paid':pd,'Total Fee Pending':fee-pd,'Total Fee Till Date':td,'Total Fee Paid Till Date':pt,'Total Fee Pending Till Date':ov,'Total Fee Pending Till Date Bucket':ov<1?BK[0]:BK[1+Math.floor(Math.random()*3)],'Fee Deadline Date':'2026-10-15','Loan Partners':L[Math.floor(Math.random()*3)],'Late fees':ov>0?Math.floor(Math.random()*5000):0};
+for(var s=1;s<=8;s++){var pp=s<=3?per:(Math.random()<.3?per:0);r['Sem'+s+' Fee Paid']=pp;r['Sem'+s+' Fee Pending']=per-pp}d.push(r)}
+load(d,'Showing demo data. Upload your CSV.')}
+var SRC_URL='',REFRESH_MIN=5;/* live data refreshes automatically every 5 minutes */
+function stamp(){return new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}
+function fromUrl(u,quiet){SRC_URL=u;var sep=u.indexOf('?')>-1?'&':'?';
+Papa.parse(u+sep+'_='+Date.now(),{download:true,header:true,skipEmptyLines:true,complete:function(r){load(r.data,'Live from Google Sheet · '+r.data.length+' rows · updated '+stamp(),quiet);try{localStorage.setItem('sheetUrl',u)}catch(e){}},
+error:function(){if(quiet){$('src').textContent='Refresh failed at '+stamp()+'. Showing the last loaded data.'}else{alert('Could not open the link. In Google Sheets use File > Share > Publish to web > CSV and paste that link.')}}})}
+function refresh(){if(!SRC_URL)return;fromUrl(SRC_URL,true);dLoad(function(){if(pg===2)drawS();if(pg===3)drawF()})}
+setInterval(refresh,REFRESH_MIN*60000);
+function sheet(){var u=prompt('Paste the published CSV link of your Google Sheet');if(u)fromUrl(u.trim())}
+var YEARLY=['ADYPU','VGUJ'];/* these campuses charge fees yearly, not per semester */
+function splitYear(r){if(YEARLY.indexOf(String(r.Campus_Name).trim().toUpperCase())<0)return;
+for(var n=1;n<=7;n+=2){var P='Sem'+n+' Fee Paid',Q='Sem'+n+' Fee Pending',P2='Sem'+(n+1)+' Fee Paid',Q2='Sem'+(n+1)+' Fee Pending';
+var p=num(r[P]),q=num(r[Q]),p2=num(r[P2]),q2=num(r[Q2]);if(p+q<=0||p2+q2>0)continue;
+var h=(p+q)/2,a=Math.min(p,h);r[P]=a;r[Q]=h-a;r[P2]=p-a;r[Q2]=h-(p-a);r._y=1}}
+var API='';/* paste your Apps Script link here, see the SETUP file */
+var IDX={},DISP=[],pg=1,CUR=null;
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function today(){var d=new Date(),p=function(n){return('0'+n).slice(-2)};return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())}
+function dLoad(cb){$('dnote').textContent=API?'':'Note: dispositions are currently saved only in this browser. Follow the SETUP file steps to share them with everyone.';
+if(API){fetch(API).then(function(r){return r.json()}).then(function(j){DISP=j.rows||[];cb()}).catch(function(){$('dnote').textContent='Could not load dispositions. Check the Apps Script link.';cb()})}
+else{try{DISP=JSON.parse(localStorage.getItem('disp')||'[]')}catch(e){DISP=[]}cb()}}
+function dSave(row,cb){DISP.push(row);if(API){fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(row)}).then(function(r){return r.json()}).then(function(){cb(true)}).catch(function(){cb(false)})}
+else{try{localStorage.setItem('disp',JSON.stringify(DISP))}catch(e){}cb(true)}}
+function latest(id){for(var i=DISP.length-1;i>=0;i--)if(String(DISP[i].id)===String(id))return DISP[i];return null}
+function hist(id){return DISP.filter(function(d){return String(d.id)===String(id)})}
+function go(n){pg=n;[1,2,3].forEach(function(i){$('pg'+i).hidden=i!==n;$('t'+i).classList.toggle('on',i===n)});if(n===2)drawS();if(n===3)drawF()}
+function opts(el,all,list){var cur=$(el).value;$(el).innerHTML='<option value="">'+all+'</option>'+list.map(function(v){return'<option>'+esc(v)+'</option>'}).join('');$(el).value=cur}
+function fillF(){var u=function(k){return Array.from(new Set(R.map(function(r){return r[k]}).filter(Boolean))).sort()};opts('s_c','All campuses',u('Campus_Name'));opts('s_b','All batches',u('Batch'));opts('f_c','All campuses',u('Campus_Name'))}
+function drawS(){var q=$('s_q').value.toLowerCase(),c=$('s_c').value,b=$('s_b').value,m=$('s_d').value,pp=$('s_p').value;
+var a=R.filter(function(r){var l=latest(r.ID);return(!c||r.Campus_Name===c)&&(!b||r.Batch===b)&&(!q||(String(r.Name)+String(r.ID)).toLowerCase().indexOf(q)>-1)&&(pp==='all'||num(r['Total Fee Pending Till Date'])>0)&&(m!=='has'||l)&&(m!=='none'||!l)});
+a.sort(function(x,y){return num(y['Total Fee Pending Till Date'])-num(x['Total Fee Pending Till Date'])});
+LS=a;$('s_n').textContent=a.length+' students'+(a.length>200?' (showing top 200, use filters)':'');
+$('s_t').innerHTML=a.slice(0,200).map(function(r){var l=latest(r.ID),ds=l?'<b>'+esc(l.reason)+'</b>'+(l.promise_date?' &middot; '+esc(l.promise_date):''):'<span class="mu">-</span>';
+return'<tr><td>'+esc(r.Name)+'</td><td>'+esc(r.ID)+'</td><td>'+esc(r.Campus_Name)+'</td><td>'+esc(r.Batch)+'</td><td class="bad">'+fmt(num(r['Total Fee Pending Till Date']))+'</td><td>'+fmt(r._ce)+'</td><td>'+fmt(num(r['Previous pending']))+'</td><td>'+ds+'</td><td><button class="btn" data-id="'+esc(r.ID)+'" onclick="openD(this.dataset.id)">'+(l?'View / Add':'Add')+'</button></td></tr>'}).join('')||'<tr><td colspan="9" class="sub">No students found</td></tr>'}
+function openD(id){var r=IDX[id];if(!r)return;CUR=id;$('m_t').textContent=r.Name+' ('+r.ID+')';
+$('m_i').textContent=r.Campus_Name+' · Batch '+r.Batch+' · Pending till date '+fmt(num(r['Total Fee Pending Till Date']))+' · Cur sem pending '+fmt(r._ce)+' · Previous pending '+fmt(num(r['Previous pending']));
+$('m_r').value='';$('m_n').value='';$('m_d').value='';$('m_e').textContent='';
+var h=hist(id).reverse();$('m_h').innerHTML=h.length?h.map(function(d){return'<div class="hh"><b>'+esc(d.reason)+'</b>'+(d.promise_date?' · promise: '+esc(d.promise_date):'')+(d.note?' · '+esc(d.note):'')+'<div class="mu">'+new Date(Number(d.ts)).toLocaleString('en-IN')+(d.by?' · '+esc(d.by):'')+'</div></div>'}).join(''):'<div class="mu">No dispositions yet</div>';
+$('md').style.display='flex'}
+function closeD(){$('md').style.display='none'}
+function saveD(){var re=$('m_r').value;if(!re){$('m_e').textContent='Please select a reason first';return}var r=IDX[CUR],u='';try{u=sessionStorage.getItem('user')||''}catch(e){}
+var row={ts:Date.now(),id:r.ID,name:r.Name,campus:r.Campus_Name,batch:r.Batch,reason:re,promise_date:$('m_d').value,pending_at_time:num(r['Total Fee Pending Till Date']),note:$('m_n').value.trim(),by:u};
+$('m_s').disabled=true;dSave(row,function(ok){$('m_s').disabled=false;if(!ok){DISP.pop();$('m_e').textContent='Could not save. Check your internet or the Apps Script link.';return}closeD();if(pg===2)drawS();if(pg===3)drawF()})}
+var SL={paid:['Paid','g'],part:['Partly paid','y'],np:['Not paid yet','n'],over:['Not paid, date passed','r']};
+function stat(r,d){var cur=num(r['Total Fee Pending Till Date']),at=num(d.pending_at_time),pd=Math.max(0,at-cur);return{cur:cur,at:at,pd:pd,s:cur<=0?'paid':pd>0?'part':(String(d.promise_date)<today()?'over':'np')}}
+function drawF(){var a0=$('f_a').value,b0=$('f_b').value,sf=$('f_s').value,cf=$('f_c').value,L=[];
+R.forEach(function(r){var d=latest(r.ID);if(!d||!d.promise_date)return;var pd=String(d.promise_date);if(a0&&pd<a0)return;if(b0&&pd>b0)return;if(cf&&r.Campus_Name!==cf)return;var st=stat(r,d);if(sf&&st.s!==sf)return;L.push({r:r,d:d,st:st})});
+L.sort(function(x,y){return String(x.d.promise_date).localeCompare(String(y.d.promise_date))||y.st.cur-x.st.cur});
+LF=L;var S=function(f){return L.reduce(function(s,x){return s+f(x)},0)},full=L.filter(function(x){return x.st.s==='paid'}).length;
+var kc=function(l,v){return'<div class="c"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>'};
+$('f_k').innerHTML=kc('Students who gave a date',L.length)+kc('Pending at promise',fmt(S(function(x){return x.st.at})))+kc('Received since',fmt(S(function(x){return x.st.pd})))+kc('Still pending',fmt(S(function(x){return x.st.cur})))+kc('Paid in full',full);
+var g={};L.forEach(function(x){(g[x.d.promise_date]=g[x.d.promise_date]||[]).push(x)});
+var row=function(n,A){var sm=function(f){return A.reduce(function(s,x){return s+f(x)},0)};return[n,A.length,fmt(sm(function(x){return x.st.at})),fmt(sm(function(x){return x.st.pd})),fmt(sm(function(x){return x.st.cur})),A.filter(function(x){return x.st.s==='paid'}).length]};
+tbl('f_d',['Promise date','Students','Pending at promise','Received since','Still pending','Paid in full'],Object.keys(g).sort().map(function(k){return row(k,g[k])}),L.length?row('Total',L):null);
+$('f_t').innerHTML=L.map(function(x){var r=x.r,d=x.d,s=SL[x.st.s];return'<tr><td>'+esc(r.Name)+'</td><td>'+esc(r.ID)+'</td><td>'+esc(r.Campus_Name)+'</td><td>'+esc(r.Batch)+'</td><td>'+esc(d.promise_date)+'</td><td>'+esc(d.reason)+'</td><td>'+fmt(x.st.at)+'</td><td class="bad">'+fmt(x.st.cur)+'</td><td>'+fmt(x.st.pd)+'</td><td><span class="b '+s[1]+'">'+s[0]+'</span></td><td><button class="btn g" data-id="'+esc(r.ID)+'" onclick="openD(this.dataset.id)">Open</button></td></tr>'}).join('')||'<tr><td colspan="11" class="sub">No promises found. Add a disposition from the Students page.</td></tr>'}
+
+var LS=[],LF=[];
+function dl(name,head,rows){var q=function(x){return '"'+String(x==null?'':x).replace(/"/g,'""')+'"'};var t=[head].concat(rows).map(function(r){return r.map(q).join(',')}).join('\n');var b=new Blob(['\ufeff'+t],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove()}
+function expS(){dl('students-disposition.csv',['Name','ID','Campus','Batch','Pending till date','Cur sem pending','Previous pending','Reason','Promise date','Note'],LS.map(function(r){var l=latest(r.ID)||{};return[r.Name,r.ID,r.Campus_Name,r.Batch,Math.round(num(r['Total Fee Pending Till Date'])),Math.round(r._ce),Math.round(num(r['Previous pending'])),l.reason||'',l.promise_date||'',l.note||'']}))}
+function expF(){dl('followups.csv',['Name','ID','Campus','Batch','Promise date','Reason','Pending then','Pending now','Paid since','Status','Note'],LF.map(function(x){return[x.r.Name,x.r.ID,x.r.Campus_Name,x.r.Batch,x.d.promise_date,x.d.reason,Math.round(x.st.at),Math.round(x.st.cur),Math.round(x.st.pd),SL[x.st.s][0],x.d.note||'']}))}
+
+var EMB=[];
+if(EMB.length)load(EMB,'ALTA fee dump ('+EMB.length+' students). Upload a new CSV to refresh.');else load([],'No data loaded yet. Admin can upload a CSV or set DATA_URL.');
+</script><script>
+/* ===== ADMIN: edit here ===== */
+var ADMINS=['jatin.kumar1@sunstone.in','nawal.pathak@sunstone.in'];/* admin: full access */
+var VIEWERS=['viewer1@sunstone.in','viewer2@sunstone.in','viewer3@sunstone.in','viewer4@sunstone.in','viewer5@sunstone.in','viewer6@sunstone.in'];/* viewer: can view and add dispositions */
+var DATA_URL='';/* optional: published CSV link of your Google Sheet, everyone sees the same data */
+var ALLOWED=ADMINS.concat(VIEWERS);
+var PASSWORD='Alta@Fees2026';
+/* ===== that's all ===== */
+function okEmail(e){return ALLOWED.map(function(x){return x.trim().toLowerCase()}).indexOf(e)>-1}
+var ROLE='viewer';
+function unlock(e){ROLE=ADMINS.map(function(x){return x.trim().toLowerCase()}).indexOf(e)>-1?'admin':'viewer';dLoad(function(){if(pg===2)drawS();if(pg===3)drawF()});document.body.classList.remove('locked');document.getElementById('lg').style.display='none';document.getElementById('who').textContent=e+' ('+(ROLE==='admin'?'Admin':'Viewer')+')';
+if(ROLE!=='admin')Array.prototype.forEach.call(document.querySelectorAll('.adm'),function(x){x.hidden=true});
+if(DATA_URL)fromUrl(DATA_URL);else if(ROLE==='admin'){try{var su=localStorage.getItem('sheetUrl');if(su)fromUrl(su)}catch(x){}}}
+function signin(){var e=document.getElementById('em').value.trim().toLowerCase(),p=document.getElementById('pw').value;
+if(!okEmail(e)||p!==PASSWORD){document.getElementById('er').textContent='Incorrect email or password, or this email does not have access.';return}
+try{sessionStorage.setItem('user',e)}catch(x){}unlock(e)}
+function signout(){try{sessionStorage.removeItem('user')}catch(x){}location.reload()}
+document.getElementById('pw').addEventListener('keydown',function(e){if(e.key==='Enter')signin()});
+try{var u=sessionStorage.getItem('user');if(u&&okEmail(u))unlock(u)}catch(x){}
+</script></body></html>
